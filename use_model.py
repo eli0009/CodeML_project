@@ -7,7 +7,10 @@ acc = model.predict(
     features,
 )
 
-for a in acc:
-    print(a * 100)
-
-
+success = 0
+for a, b in zip(acc, labels):
+    prediction = True if a[0] >=0 else False
+    if prediction == b:
+        success += 1
+print(len(acc))
+print(success)
