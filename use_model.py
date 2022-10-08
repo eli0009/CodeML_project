@@ -1,13 +1,13 @@
+from tabnanny import verbose
 import tensorflow as tf
-from main import root, dt_features, dt_labels, preprocessed_inputs
+from main import model_path, features, labels
 
-model = tf.keras.models.load_model(str(root / 'model'))
+model = tf.keras.models.load_model(model_path)
+acc = model.predict(
+    features,
+)
 
-dt_labels = tf.convert_to_tensor(dt_labels)
-dt_features = preprocessed_inputs
+for a in acc:
+    print(a * 100)
 
-# test_loss, test_acc = model.evaluate(dt_features, dt_labels, verbose=2)
 
-# print('\nTest accuracy:', test_acc)
-
-print(dt_features)
