@@ -4,3 +4,8 @@ This is the project repo for CodeML 2022. To begin collaborating simply create a
 ```
 git clone https://github.com/eli0009/CodeML_project .
 ```
+
+## Model
+
+This is how our model look like:
+![model](model.png)
