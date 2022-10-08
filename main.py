@@ -109,5 +109,5 @@ if __name__ == "__main__":
     # print(preprocessed_inputs)
     # print_model('model')
     # print_tensors()
-    
-    train_model()
+    print_tensors()
+    # train_model()
