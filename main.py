@@ -103,9 +103,11 @@ if __name__ == "__main__":
         for i in range(1, len(dt_features_dict)):
             features_dict = {name:values[i-1:i] for name, values in dt_features_dict.items()}
             print(dt_preprocessing(features_dict))
-
-
+    
+        
     # print_data()
     # print(preprocessed_inputs)
-    print_model('model')
+    # print_model('model')
     # print_tensors()
+    
+    train_model()
