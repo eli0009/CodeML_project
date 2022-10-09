@@ -20,13 +20,16 @@ dt = dt[dt['avg_glucose_level'] < 5000]
 
 features = dt.copy()
 labels = features.pop('label')
-features = features
 
 features = np.array(features).astype('float32')
 model_path = str(root / 'model')
 
 if __name__ == "__main__":
+    normalize = tf.keras.layers.Normalization()
+    normalize.adapt(features)
+
     model = tf.keras.Sequential([
+        normalize,
         tf.keras.layers.Dense(64),
         tf.keras.layers.Dense(64),
         tf.keras.layers.Dense(64),

@@ -18,7 +18,7 @@ def test_accuracy():
             success += 1
     print('accuracy: ' + str(success / len(acc) * 100))
 
-def get_label():
+def get_label(display_graph=False):
     dt = get_csv('participants_dataset_predict.csv')
     dt.pop('label')
     dt = np.array(dt)
@@ -28,11 +28,23 @@ def get_label():
     )
 
     predictions = [] 
+    values = []
     with open(str(root/'a.csv'), 'w') as fp:
         for a in acc:
-            prediction = True if a[0] >=0.5 else False
+            values.append(a[0] if a[0] < 0.5 else 0.5)
+            prediction = True if a[0] >=0.35 else False
             print(int(prediction), file=fp)
             predictions.append(prediction)
+    if display_graph:
+        import matplotlib.pyplot as plt
+
+        plt.plot(values, color='magenta', marker='o',mfc='pink' ) #plot the data
+        plt.xticks(range(0,len(values)+1, 1)) #set the tick frequency on x-axis
+
+        plt.ylabel('data') #set the label for y axis
+        plt.xlabel('index') #set the label for x-axis
+        plt.title("Plotting a list") #set the title of the graph
+        plt.show() #display the graph
     print(len(dt))
     print(len(predictions))
 
