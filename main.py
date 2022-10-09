@@ -3,19 +3,22 @@ import numpy as np
 import pandas as pd
 from pathlib import Path
 
-#laod csv
 root = Path(__file__).parent
-csv = 'participants_dataset.csv'
-dt = pd.read_csv(str(root/csv))
-dt.drop(['ID', 
-'gender',
-'ever_married',
-'work_type',
-'Residence_type',
-'smoking_status'
-]
-, axis=1, inplace=True)
-#remove rows without label
+#laod csv
+def get_csv(csv='participants_dataset.csv'):
+    '''get csv from file an turn into a numpy array'''
+    dt = pd.read_csv(str(root/csv))
+    dt.drop(['ID', 
+    'gender',
+    'ever_married',
+    'work_type',
+    'Residence_type',
+    'smoking_status'
+    ]
+    , axis=1, inplace=True)
+    #remove rows without label
+    return dt
+dt = get_csv()
 dt = dt.dropna()
 
 features = dt.copy()
