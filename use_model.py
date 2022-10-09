@@ -32,7 +32,7 @@ def get_label(display_graph=False):
     with open(str(root/'a.csv'), 'w') as fp:
         for a in acc:
             values.append(a[0] if a[0] < 0.5 else 0.5)
-            prediction = True if a[0] >=0.35 else False
+            prediction = True if a[0] >=0.4 else False
             print(int(prediction), file=fp)
             predictions.append(prediction)
     if display_graph:
@@ -49,4 +49,4 @@ def get_label(display_graph=False):
     print(len(predictions))
 
 if __name__ == '__main__':
-    get_label(True)
+    get_label()
