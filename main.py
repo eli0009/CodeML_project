@@ -4,11 +4,26 @@ import pandas as pd
 from pathlib import Path
 
 root = Path(__file__).parent
-#laod csv
+#load csv
+
+def transform_categorical(df,original_column, stop_overfit = False):
+  df_to_add = pd.get_dummies(df[original_column])
+  colnames = df_to_add.columns.values
+
+  for i in colnames:
+    if stop_overfit and i == colnames[-1]:
+      break
+    df[i] = df_to_add[i].tolist() #add new col
+
+  df.drop(original_column) #remove original col
+
+  return df
+
+
 def get_csv(csv='participants_dataset.csv'):
     '''get csv from file an turn into a numpy array'''
     dt = pd.read_csv(str(root/csv))
-    dt.drop(['ID', 
+    dt.drop(['ID',
     'work_type',
     ]
     , axis=1, inplace=True)
@@ -16,7 +31,8 @@ def get_csv(csv='participants_dataset.csv'):
     return dt
 dt = get_csv()
 dt = dt.dropna()
-dt = dt[dt['avg_glucose_level'] < 5000]
+dt = dt[dt['avg_glucose_level'] < 265]
+
 
 features = dt.copy()
 labels = features.pop('label')
