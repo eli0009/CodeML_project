@@ -6,31 +6,33 @@ from pathlib import Path
 root = Path(__file__).parent
 #load csv
 
-def transform_categorical(df,original_column, stop_overfit = False):
-  df_to_add = pd.get_dummies(df[original_column])
-  colnames = df_to_add.columns.values
+def transform_categorical(df, stop_overfit = False):
+    CATEGORICAL_COLUMNS = ['gender','ever_married','work_type','Residence_type','smoking_status']
+    for original_column in CATEGORICAL_COLUMNS:
+        df_to_add = pd.get_dummies(df[original_column])
+        colnames = df_to_add.columns.values
 
-  for i in colnames:
-    if stop_overfit and i == colnames[-1]:
-      break
-    df[i] = df_to_add[i].tolist() #add new col
+        for i in colnames:
+        if stop_overfit and i == colnames[-1]:
+            break
+        df[i] = df_to_add[i].tolist() #add new col
 
-  df.drop(original_column) #remove original col
+        df.drop(original_column) #remove original col
 
-  return df
+    return df
 
 
 def get_csv(csv='participants_dataset.csv'):
     '''get csv from file an turn into a numpy array'''
     dt = pd.read_csv(str(root/csv))
-    dt.drop(['ID',
-    'work_type',
+    dt.drop(['ID'
     ]
     , axis=1, inplace=True)
     #remove rows without label
     return dt
 dt = get_csv()
 dt = dt.dropna()
+dt = transform_categorical(dt)
 dt = dt[dt['avg_glucose_level'] < 265]
 
 
