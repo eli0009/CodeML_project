@@ -49,4 +49,4 @@ def get_label(display_graph=False):
     print(len(predictions))
 
 if __name__ == '__main__':
-    get_label()
+    get_label(True)
