@@ -1,4 +1,3 @@
-from tabnanny import verbose
 import tensorflow as tf
 import numpy as np
 import pandas as pd
@@ -31,7 +30,7 @@ def get_label():
     predictions = [] 
     with open(str(root/'a.csv'), 'w') as fp:
         for a in acc:
-            prediction = True if a[0] >=0 else False
+            prediction = True if a[0] >=0.5 else False
             print(int(prediction), file=fp)
             predictions.append(prediction)
     print(len(dt))
