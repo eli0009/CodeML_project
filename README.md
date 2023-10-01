@@ -14,8 +14,8 @@ git clone https://github.com/eli0009/CodeML_project .
 
 ## Model
 
-This is how our model look like:
+This is what our model looks like:
 ![model](model.png)
 
-This is the predictions of our model for 1251 entries:
+These are the predictions of our model for 1251 entries:
 ![predictions](predictions.png)
